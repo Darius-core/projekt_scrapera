@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stronka-flask
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stronka-flask
+  template:
+    metadata:
+      labels:
+        app: stronka-flask
+    spec:
+      containers:
+        - name: stronka-flask
+          image: dariuscore/stronka-flask:latest
+          ports:
+            - containerPort: 5000
+          env:
+            - name: FLASK_ENV
+              value: production
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: stronka-flask
+spec:
+  selector:
+    app: stronka-flask
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
+  type: NodePort
