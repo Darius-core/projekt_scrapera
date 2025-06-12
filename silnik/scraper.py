@@ -18,8 +18,9 @@ def extract_phones(text):
 
 def extract_addresses(text):
     pattern = re.compile(
-        r"(?P<street>(ul\.|al\.|Al\.|plac|Plac)?\s?[A-ZŁŚĆŹŻ][a-ząćęłńóśźżA-Z\s\-]+)\s(?P<number>\d+[a-zA-Z]?(/\d+)?),?\s+(?P<postcode>\d{2}-\d{3})\s+(?P<city>[A-ZŁŚĆŹŻ][a-ząćęłńóśźżA-Z\s\-]+)"
+        r'(?P<street>(ul\.|al\.|Al\.|plac|Plac)?\s?[A-ZŁŚĆŹŻ][a-ząćęłńóśźżA-Z\s\-]+)\s(?P<number>\d+[a-zA-Z]?(/\d+)?),?\s+(?P<postcode>\d{2}-\d{3})\s+(?P<city>[A-ZŁŚĆŹŻ][a-ząćęłńóśźżA-Z\s\-]+)'
     )
+
     matches = []
     for match in pattern.finditer(text):
         street = match.group("street")
