@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Web Scraper</title>
+    </head>
+    <body>
+        <h1>Dodaj URL do scrapowania</h1>
+        <form method="POST">
+            <input name="url" type="text" placeholder="https://www.example.com" required>
+            <button type="submit"> Start </button>
+        </form>
+        <h2>Ostatnnie Wyniki: </h2>
+        <ul>
+            {% for result in results %}
+            <li>
+                <a href="/details/{{ result._id }}"> {{ result.url }} </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>

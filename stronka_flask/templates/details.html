@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Szczegóły scrapowania</title>
+    </head>
+    <body>
+        <h1>Szczegóły dla {{ record.url }}: </h1>
+        <p><strong>Czas:</strong> {{ record.timestamp }} </p>
+        
+        <h3>E-maile: </h3>
+        <ul> {% for email in record.emails %} <li> {{email}} </li> {% endfor %} </ul>
+                
+        <h3>Telefony: </h3>
+        <ul> {% for phone in record.phones %} <li> {{phone}} </li> {% endfor %} </ul>
+
+        <h3>Adresy: </h3>
+        <ul> {% for addr in record.addresses %} <li> {{addr}} </li> {% endfor %} </ul>
+        
+        <h3>Obrazki: </h3>
+        {% for img in record.images %}
+            <img src="{{ img }}" width="200">
+        {% endfor %}
+
+    </body>
+</html>
