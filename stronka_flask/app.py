@@ -29,7 +29,7 @@ def index():
 @app.route("/details/<id>")
 def details(id):
     from bson import ObjectId
-    record = col.find_one({"id":ObjectId(id)})
+    record = col.find_one({"_id":ObjectId(id)})
     return render_template("details.html", record=record)
 
 if __name__ == "__main__":
