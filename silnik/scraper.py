@@ -10,13 +10,26 @@ from datetime import datetime
 # ========== Funkcje wyciągające z BeautifulSoup
 
 def extract_emails(text):
-    return re.findall(r"[a-zA-Z0-9_.+-]+@[a-zA-Z0-9]+\.[a-zA-Z0-9_.]+",text)
+    pattern = re.compile(r'[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9.-]+')
+    return re.findall(pattern, text)
 
 def extract_phones(text):
     return re.findall(r"\+?\d[\d\s\-\(\)]{7,}\d",text)
 
 def extract_addresses(text):
-    return re.findall(r"ul\.\s?[A-ZŁŚŹŻ][\w\s\-]+?\d+[A-Z]?(,\s?\d{2}-\d{3}\s[\w\s]+)?",text)
+   pattern = re.compile(
+        r'(?P<street>(ul\.|al\.|Al\.|plac|Plac)?\s?[A-ZŁŚĆŹŻ][a-ząćęłńóśźżA-Z\s\-]+)\s(?P<number>\d+[a-zA-Z]?(/\d+)?),?\s+(?P<postcode>\d{2}-\d{3})\s+(?P<city>[A-ZŁŚĆŹŻ][a-ząćęłńóśźżA-Z\s\-]+)'
+    )
+
+    matches = []
+    for match in pattern.finditer(text):
+        street = match.group("street")
+        number = match.group("number")
+        postcode = match.group("postcode")
+        city = match.group("city")
+        full = f"{street} {number}, {postcode} {city}"
+        matches.append(full)
+    return matches
 
 def extract_images(soup, base_url):
     return [urljoin(base_url, img['src']) for img in soup.find_all("img",src=True)]
