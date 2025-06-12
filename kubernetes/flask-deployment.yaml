@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: stronka-flask
-          image: dariuscore/stronka-flask:latest
+          image: dariuscore/stronka_flask:latest
           ports:
             - containerPort: 5000
           env:
