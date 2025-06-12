@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  stronka_flask:
+    build: 
+      context: ./stronka_flask
+    container_name: stronka_flask
+    ports:
+      - "5000:5000"
+    depends_on:
+      - silnik
+      - mongo
+    environment:
+      - FLASK_ENV=development
+    networks:
+      - scraper_net
+
+  silnik:
+    build: 
+      context: ./silnik
+    container_name: silnik
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongo
+    networks:
+      - scraper_net
+
+  mongo:
+    image: mongo:6
+    container_name: mongo
+    ports: 
+      - "27017:21017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - scraper_net
+
+volumes:
+  mongo_data:
+
+networks:
+  scraper_net:
