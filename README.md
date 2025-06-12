@@ -1,6 +1,6 @@
 # projekt_scrapera
 
-Struktura danych jakie będą zbierane przez scrapera:
+Struktura danych zbieranych przez scrapera:
 - numery telefonów
 - adresy email
 - adres pocztowy
