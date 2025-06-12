@@ -32,8 +32,8 @@ async def fetch_and_parse(session, url):
 
             data = {
                 "url": url,
-                "email": extract_emails(text),
-                "phone": extract_phones(text),
+                "emails": extract_emails(text),
+                "phones": extract_phones(text),
                 "addresses": extract_addresses(text),
                 "images": extract_images(soup, url),
                 "timestamp": datetime.utcnow().isoformat()
